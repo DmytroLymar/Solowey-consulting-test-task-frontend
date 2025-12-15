@@ -1,37 +1,40 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { RequireAuth } from "./auth/RequireAuth";
+
+import { AppLayout } from "./layout/AppLayout/AppLayout";
+import { AuthLayout } from "./layout/AuthLayout";
+
 import { LoginPage } from "./pages/LoginPage";
 import { RegisterPage } from "./pages/RegisterPage";
+
+import { HomePage } from "./pages/HomePage";
 import { ItemsPage } from "./pages/ItemsPage";
-import { useAuth } from "./auth/useAuth";
+import { CartPage } from "./pages/CartPage";
+import { OrdersPage } from "./pages/OrdersPage";
+import { AdminPage } from "./pages/AdminPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
 
 export default function App() {
-  const { user, isLoading } = useAuth();
-
-  if (isLoading) return <div style={{ padding: 16 }}>Loading...</div>;
-
   return (
     <Routes>
-      <Route
-        path="/"
-        element={<Navigate to={user ? "/items" : "/login"} replace />}
-      />
-
-      <Route
-        path="/login"
-        element={user ? <Navigate to="/items" replace /> : <LoginPage />}
-      />
-      <Route
-        path="/register"
-        element={user ? <Navigate to="/items" replace /> : <RegisterPage />}
-      />
-
-      {/* Protected */}
-      <Route element={<RequireAuth />}>
-        <Route path="/items" element={<ItemsPage />} />
+      {/* 🔐 AUTH PAGES (без header/footer) */}
+      <Route element={<AuthLayout />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Route>
 
-      <Route path="*" element={<div style={{ padding: 16 }}>Not found</div>} />
+      {/* 🧱 MAIN APP (з header/footer) */}
+      <Route element={<AppLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/items" element={<ItemsPage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/orders" element={<OrdersPage />} />
+        <Route path="/admin" element={<AdminPage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+
+      {/* optional redirects */}
+      <Route path="/home" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

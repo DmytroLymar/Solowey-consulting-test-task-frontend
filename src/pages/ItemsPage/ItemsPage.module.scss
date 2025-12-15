@@ -1,0 +1,64 @@
+@use "../../styles/variables" as *;
+
+.page {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 16px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.subtitle {
+  margin: 4px 0 0;
+  color: $text-muted;
+}
+
+.actions {
+  margin-top: 16px;
+}
+
+.error {
+  margin-top: 8px;
+  color: $error;
+}
+
+.list {
+  margin-top: 24px;
+  padding-left: 0;
+  list-style: none;
+}
+
+.card {
+  border: 1px solid $border-color;
+  border-radius: $radius;
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: $bg-card;
+}
+
+.itemTitle {
+  margin: 0 0 4px;
+}
+
+.itemDesc {
+  margin: 0 0 4px;
+  color: $text-muted;
+}
+
+.itemPrice {
+  margin: 0;
+  font-weight: 700;
+}
+
+.image {
+  margin-top: 8px;
+  width: 240px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: $radius;
+  display: block;
+}

@@ -1,8 +1,8 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { RequireAuth } from "./auth/RequireAuth";
 import { LoginPage } from "./pages/LoginPage";
-import { RegisterPage } from "./pages/RegisterPage";
-import { ItemsPage } from "./pages/ItemsPage";
+import { RegisterPage } from "./pages/RegisterPage/RegisterPage";
+import { ItemsPage } from "./pages/ItemsPage/ItemsPage";
 import { useAuth } from "./auth/useAuth";
 
 export default function App() {

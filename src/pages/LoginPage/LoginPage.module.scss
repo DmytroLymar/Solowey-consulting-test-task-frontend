@@ -1,0 +1,33 @@
+@use "../../styles/variables" as *;
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  background-color: $bg-card;
+  border-radius: $radius;
+  border: 1px solid $border-color;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.formGroup {
+  margin-bottom: 12px;
+}
+
+.error {
+  margin-top: 12px;
+  color: $error;
+  text-align: center;
+}

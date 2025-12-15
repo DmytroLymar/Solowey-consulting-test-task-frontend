@@ -12,25 +12,30 @@ import { CartPage } from "./pages/CartPage";
 import { OrdersPage } from "./pages/OrdersPage";
 import { AdminPage } from "./pages/AdminPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { RequireAuth } from "./auth/RequireAuth";
+import { RedirectIfAuth } from "./auth/RedirectIfAuth";
 
 export default function App() {
   return (
     <Routes>
       {/* 🔐 AUTH PAGES (без header/footer) */}
       <Route element={<AuthLayout />}>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="/register" element={<RegisterPage />} />
+        <Route element={<RedirectIfAuth />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+        </Route>
       </Route>
 
       {/* 🧱 MAIN APP (з header/footer) */}
-      <Route element={<AppLayout />}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/items" element={<ItemsPage />} />
-        <Route path="/cart" element={<CartPage />} />
-        <Route path="/orders" element={<OrdersPage />} />
-        <Route path="/admin" element={<AdminPage />} />
-
-        <Route path="*" element={<NotFoundPage />} />
+      <Route element={<RequireAuth />}>
+        <Route element={<AppLayout />}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/items" element={<ItemsPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
       </Route>
 
       {/* optional redirects */}

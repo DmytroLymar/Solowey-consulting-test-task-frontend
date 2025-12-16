@@ -1,6 +1,10 @@
 @use "./variables" as *;
 @use "./reset";
 
+:root {
+  --app-header-height: 64px;
+}
+
 body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
     sans-serif;

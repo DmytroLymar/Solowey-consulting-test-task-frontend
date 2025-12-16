@@ -2,6 +2,7 @@ import type { Item } from "./Item";
 
 export type OrderDescription = {
   id: string;
+  unit_price: number | string;
   item_id: string;
   order_id: string;
   quantity: number;

@@ -58,7 +58,21 @@ export function OrderCard({ order, isOpen, onToggle }: OrderCardProps) {
 
           <ul className={styles.items}>
             {order.order_descriptions.map((d) => {
-              const price = toNumber(d.item.price);
+              if (!d.item) {
+                return (
+                  <li key={d.id} className={styles.itemRow}>
+                    <div className={styles.itemMain}>
+                      <span className={styles.deleted}>
+                        Deleted item (id: {d.item_id.slice(0, 8)}…)
+                      </span>
+                      <div className={styles.itemSub}>× {d.quantity}</div>
+                    </div>
+                    <div className={styles.itemTotal}>—</div>
+                  </li>
+                );
+              }
+
+              const price = toNumber(d.unit_price);
               const lineTotal = price * d.quantity;
 
               return (
@@ -74,7 +88,6 @@ export function OrderCard({ order, isOpen, onToggle }: OrderCardProps) {
                       ${price.toFixed(2)} × {d.quantity}
                     </div>
                   </div>
-
                   <div className={styles.itemTotal}>
                     ${lineTotal.toFixed(2)}
                   </div>

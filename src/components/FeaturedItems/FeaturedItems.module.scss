@@ -1,0 +1,54 @@
+.section {
+  display: grid;
+  gap: 12px;
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title {
+  margin: 0;
+  font-size: 18px;
+}
+
+.link {
+  color: #bdbdbd;
+  text-decoration: none;
+  font-size: 14px;
+
+  &:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+}
+
+.info {
+  margin: 0;
+  color: #9a9a9a;
+}
+
+.error {
+  margin: 0;
+  color: #ff6b6b;
+}
+
+.empty {
+  border: 1px dashed #333;
+  border-radius: 14px;
+  padding: 18px;
+  background: #0f0f0f;
+}
+
+.emptyTitle {
+  margin: 0 0 6px;
+  font-weight: 800;
+}
+
+.emptyText {
+  margin: 0;
+  color: #bdbdbd;
+}

@@ -1,0 +1,36 @@
+.header {
+  display: grid;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.subtitle {
+  margin: 0;
+  color: #9a9a9a;
+  font-size: 14px;
+}
+
+.info {
+  color: #9a9a9a;
+}
+
+.error {
+  color: #ff6b6b;
+}
+
+.empty {
+  border: 1px dashed #333;
+  border-radius: 14px;
+  padding: 18px;
+  background: #0f0f0f;
+}
+
+.emptyTitle {
+  margin: 0 0 6px;
+  font-weight: 700;
+}
+
+.emptyText {
+  margin: 0;
+  color: #bdbdbd;
+}

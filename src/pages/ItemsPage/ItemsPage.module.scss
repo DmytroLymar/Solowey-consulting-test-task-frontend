@@ -1,11 +1,5 @@
 @use "../../styles/variables" as *;
 
-.page {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 16px;
-}
-
 .header {
   display: flex;
   justify-content: space-between;

@@ -83,7 +83,7 @@ export function ItemsPage() {
   }, [items, searchParams]);
 
   return (
-    <div className={styles.page}>
+    <div>
       <header className={styles.header}>
         <h1>Items</h1>
       </header>

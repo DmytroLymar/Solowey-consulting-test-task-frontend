@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import type { Item } from "../../types/Item";
 import styles from "./ItemCard.module.scss";
 
@@ -19,7 +20,30 @@ export function ItemCard({
   isInCart = false,
   isFavorite = false,
 }: ItemCardProps) {
+  const navigate = useNavigate();
   const productLink = `/items/${item.id}`;
+
+  const handleCartClick = () => {
+    if (isInCart) {
+      navigate("/cart");
+      toast("Already in cart → opening cart");
+      return;
+    }
+
+    if (!onAddToCart) return;
+
+    onAddToCart(item);
+    toast.success("Added to cart");
+  };
+
+  const handleFavClick = () => {
+    if (!onToggleFavorite) return;
+
+    onToggleFavorite(item);
+
+    if (isFavorite) toast("Removed from favorites");
+    else toast.success("Added to favorites");
+  };
 
   return (
     <article className={styles.card}>
@@ -59,9 +83,8 @@ export function ItemCard({
             <button
               type="button"
               className={styles.cartBtn}
-              onClick={() => onAddToCart?.(item)}
-              disabled={!onAddToCart}
-              aria-pressed={isInCart}
+              onClick={handleCartClick}
+              disabled={!onAddToCart && !isInCart}
             >
               {isInCart ? "In cart" : "Add to cart"}
             </button>
@@ -69,7 +92,7 @@ export function ItemCard({
             <button
               type="button"
               className={styles.favBtn}
-              onClick={() => onToggleFavorite?.(item)}
+              onClick={handleFavClick}
               disabled={!onToggleFavorite}
               aria-pressed={isFavorite}
               aria-label={

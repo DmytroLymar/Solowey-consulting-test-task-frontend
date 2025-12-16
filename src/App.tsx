@@ -14,11 +14,12 @@ import { AdminPage } from "./pages/AdminPage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { RequireAuth } from "./auth/RequireAuth";
 import { RedirectIfAuth } from "./auth/RedirectIfAuth";
+import { FavoritesPage } from "./pages/FavoritesPage";
+import { ItemDetailsPage } from "./pages/ItemDetailsPage";
 
 export default function App() {
   return (
     <Routes>
-      {/* 🔐 AUTH PAGES (без header/footer) */}
       <Route element={<AuthLayout />}>
         <Route element={<RedirectIfAuth />}>
           <Route path="/login" element={<LoginPage />} />
@@ -26,19 +27,21 @@ export default function App() {
         </Route>
       </Route>
 
-      {/* 🧱 MAIN APP (з header/footer) */}
       <Route element={<RequireAuth />}>
         <Route element={<AppLayout />}>
           <Route path="/" element={<HomePage />} />
-          <Route path="/items" element={<ItemsPage />} />
+          <Route path="/items">
+            <Route index element={<ItemsPage />} />
+            <Route path=":id" element={<ItemDetailsPage />} />
+          </Route>
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/orders" element={<OrdersPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Route>
 
-      {/* optional redirects */}
       <Route path="/home" element={<Navigate to="/" replace />} />
     </Routes>
   );

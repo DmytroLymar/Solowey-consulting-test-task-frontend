@@ -1,0 +1,125 @@
+.row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 12px;
+
+  border: 1px solid #333;
+  border-radius: 14px;
+  background: #111;
+  overflow: hidden;
+}
+
+.imageLink {
+  display: block;
+  background: #0c0c0c;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.imageFallback {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  color: #888;
+  font-size: 12px;
+}
+
+.info {
+  padding: 12px 12px 12px 0;
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.name {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #bdbdbd;
+  font-size: 13px;
+}
+
+.price {
+  color: #bdbdbd;
+}
+
+.dot {
+  opacity: 0.6;
+}
+
+.lineTotal {
+  color: #fff;
+  font-weight: 700;
+}
+
+.controls {
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #333;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #0f0f0f;
+}
+
+.qtyBtn {
+  width: 36px;
+  height: 34px;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+}
+
+.qtyValue {
+  width: 40px;
+  text-align: center;
+  font-weight: 700;
+}
+
+.removeBtn {
+  border: 1px solid #333;
+  background: transparent;
+  color: #fff;
+  border-radius: 10px;
+  height: 34px;
+  padding: 0 10px;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #555;
+  }
+}

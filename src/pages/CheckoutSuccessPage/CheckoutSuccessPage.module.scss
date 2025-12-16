@@ -1,0 +1,93 @@
+.page {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+}
+
+.card {
+  max-width: 520px;
+  width: 100%;
+  border: 1px solid #333;
+  border-radius: 18px;
+  background: #111;
+  padding: 22px;
+  text-align: center;
+  display: grid;
+  gap: 14px;
+}
+
+.icon {
+  font-size: 42px;
+}
+
+.title {
+  margin: 0;
+  font-size: 26px;
+}
+
+.subtitle {
+  margin: 0;
+  color: #bdbdbd;
+}
+
+.info {
+  display: grid;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #0f0f0f;
+  border: 1px solid #222;
+
+  span {
+    color: #9a9a9a;
+  }
+}
+
+.actions {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.primaryBtn,
+.secondaryBtn {
+  height: 44px;
+  border-radius: 12px;
+  border: 1px solid #333;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-weight: 800;
+}
+
+.primaryBtn {
+  background: #3b82f6;
+  color: #fff;
+
+  &:hover {
+    filter: brightness(1.05);
+  }
+}
+
+.secondaryBtn {
+  background: #0f0f0f;
+  color: #fff;
+
+  &:hover {
+    border-color: #555;
+  }
+}
+
+.note {
+  margin: 0;
+  font-size: 12px;
+  color: #777;
+}

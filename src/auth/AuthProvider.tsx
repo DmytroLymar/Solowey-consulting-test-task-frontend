@@ -52,13 +52,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return u;
   };
 
+  const updateMe = async (payload: {
+    firstName: string;
+    lastName: string;
+    email?: string;
+  }) => {
+    const u = await apiFetch<User>("/me", {
+      method: "PATCH",
+      body: {
+        user: {
+          first_name: payload.firstName,
+          last_name: payload.lastName,
+          ...(payload.email !== undefined ? { email: payload.email } : {}),
+        },
+      },
+    });
+    setUser(u);
+    return u;
+  };
+
   const logout = async () => {
     await apiFetch<null>("/users/sign_out", { method: "DELETE" });
     setUser(null);
   };
 
   const value = useMemo<AuthContextValue>(
-    () => ({ user, isLoading, login, register, logout }),
+    () => ({ user, isLoading, login, register, updateMe, logout }),
     [user, isLoading]
   );
 

@@ -1,0 +1,152 @@
+.card {
+  border: 1px solid #333;
+  border-radius: 14px;
+  background: #111;
+  overflow: hidden;
+}
+
+.cardHead {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+
+  padding: 12px;
+
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.headLeft {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+}
+
+.orderId {
+  font-weight: 800;
+}
+
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  color: #bdbdbd;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #9a9a9a;
+  font-size: 13px;
+  flex-wrap: wrap;
+}
+
+.dot {
+  opacity: 0.6;
+}
+
+.headRight {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.amount {
+  font-weight: 900;
+}
+
+.chev {
+  color: #bdbdbd;
+  font-size: 12px;
+}
+
+.details {
+  border-top: 1px solid #222;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.detailsHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.detailsTitle {
+  font-weight: 800;
+}
+
+.detailsHint {
+  color: #777;
+  font-size: 12px;
+}
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.itemRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px;
+  border-radius: 12px;
+  background: #0f0f0f;
+  border: 1px solid #222;
+}
+
+.itemMain {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+
+.itemName {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.itemSub {
+  color: #9a9a9a;
+  font-size: 12px;
+}
+
+.itemTotal {
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+.totalRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 4px;
+
+  span {
+    color: #9a9a9a;
+  }
+}

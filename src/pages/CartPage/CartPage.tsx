@@ -1,25 +1,21 @@
 import { useMemo, useState } from "react";
 import { useCartStore } from "../../store/cartStore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./CartPage.module.scss";
 import { CartItemRow } from "../../components/CartItemRow";
-
-type Shipping = "pickup" | "courier" | "express";
-
-const SHIPPING_PRICE: Record<Shipping, number> = {
-  pickup: 0,
-  courier: 5,
-  express: 12,
-};
+import toast from "react-hot-toast";
+import { apiFetch } from "../../api/apiClient";
 
 export function CartPage() {
+  const navigate = useNavigate();
+
   const lines = useCartStore((s) => s.lines);
   const inc = useCartStore((s) => s.inc);
   const dec = useCartStore((s) => s.dec);
   const remove = useCartStore((s) => s.remove);
   const clear = useCartStore((s) => s.clear);
 
-  const [shipping, setShipping] = useState<Shipping>("courier");
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   const subtotal = useMemo(
     () => lines.reduce((sum, l) => sum + l.quantity * l.item.price, 0),
@@ -31,8 +27,50 @@ export function CartPage() {
     [lines]
   );
 
-  const shippingCost = SHIPPING_PRICE[shipping];
-  const total = subtotal + shippingCost;
+  const handleCheckout = async () => {
+    if (!lines.length || isCheckingOut) return;
+
+    try {
+      setIsCheckingOut(true);
+
+      const payload = {
+        items: lines.map((l) => ({
+          item_id: l.item.id,
+          quantity: l.quantity,
+        })),
+      };
+
+      const order = await apiFetch<{
+        id: string;
+        amount: number;
+        order_descriptions: { quantity: number }[];
+      }>("/orders", {
+        method: "POST",
+        body: payload,
+      });
+
+      clear();
+      toast.success("Order created!");
+
+      navigate("/checkout/success", {
+        replace: true,
+        state: {
+          orderId: order.id,
+          amount: order.amount,
+          itemsCount: order.order_descriptions.reduce(
+            (sum, d) => sum + d.quantity,
+            0
+          ),
+        },
+      });
+    } catch (e) {
+      toast.error((e as Error).message || "Checkout failed");
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
+
+  const total = subtotal;
 
   if (!lines.length) {
     return (
@@ -93,47 +131,6 @@ export function CartPage() {
 
             <div className={styles.divider} />
 
-            <div className={styles.blockTitle}>Delivery</div>
-            <div className={styles.radios}>
-              <label className={styles.radio}>
-                <input
-                  type="radio"
-                  name="shipping"
-                  value="pickup"
-                  checked={shipping === "pickup"}
-                  onChange={() => setShipping("pickup")}
-                />
-                <span>Pickup (free)</span>
-                <span className={styles.muted}>$0</span>
-              </label>
-
-              <label className={styles.radio}>
-                <input
-                  type="radio"
-                  name="shipping"
-                  value="courier"
-                  checked={shipping === "courier"}
-                  onChange={() => setShipping("courier")}
-                />
-                <span>Courier (2–3 days)</span>
-                <span className={styles.muted}>$5</span>
-              </label>
-
-              <label className={styles.radio}>
-                <input
-                  type="radio"
-                  name="shipping"
-                  value="express"
-                  checked={shipping === "express"}
-                  onChange={() => setShipping("express")}
-                />
-                <span>Express (next day)</span>
-                <span className={styles.muted}>$12</span>
-              </label>
-            </div>
-
-            <div className={styles.divider} />
-
             <div className={styles.blockTitle}>Promo code</div>
             <div className={styles.promo}>
               <input className={styles.promoInput} placeholder="Enter code" />
@@ -145,18 +142,18 @@ export function CartPage() {
 
             <div className={styles.divider} />
 
-            <div className={styles.summaryRow}>
-              <span>Shipping</span>
-              <b>${shippingCost.toFixed(2)}</b>
-            </div>
-
             <div className={styles.summaryRowTotal}>
               <span>Total</span>
               <b>${total.toFixed(2)}</b>
             </div>
 
-            <button className={styles.checkoutBtn} type="button">
-              Checkout
+            <button
+              className={styles.checkoutBtn}
+              type="button"
+              onClick={handleCheckout}
+              disabled={isCheckingOut}
+            >
+              {isCheckingOut ? "Processing..." : "Checkout"}
             </button>
 
             <p className={styles.smallNote}>

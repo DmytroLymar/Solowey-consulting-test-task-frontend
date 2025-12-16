@@ -16,6 +16,8 @@ import { RequireAuth } from "./auth/RequireAuth";
 import { RedirectIfAuth } from "./auth/RedirectIfAuth";
 import { FavoritesPage } from "./pages/FavoritesPage";
 import { ItemDetailsPage } from "./pages/ItemDetailsPage";
+import { ProfilePage } from "./pages/ProfilePage";
+import { CheckoutSuccessPage } from "./pages/CheckoutSuccessPage";
 
 export default function App() {
   return (
@@ -37,6 +39,8 @@ export default function App() {
           <Route path="/cart" element={<CartPage />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/orders" element={<OrdersPage />} />
+          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/checkout/success" element={<CheckoutSuccessPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>

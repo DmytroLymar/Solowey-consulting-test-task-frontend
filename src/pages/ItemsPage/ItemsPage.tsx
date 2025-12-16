@@ -8,16 +8,15 @@ import { ItemsFilters } from "../../components/ItemsFilters/ItemsFilters";
 
 type SortValue = "name_asc" | "name_desc" | "price_asc" | "price_desc";
 
-function normalize(s: string) {
-  return s.trim().toLowerCase();
-}
-
 export function ItemsPage() {
   const [searchParams] = useSearchParams();
 
   const [items, setItems] = useState<Item[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+
+  const q = (searchParams.get("q") ?? "").trim();
+  const sort = (searchParams.get("sort") as SortValue) ?? "name_asc";
 
   useEffect(() => {
     let isMounted = true;
@@ -27,19 +26,15 @@ export function ItemsPage() {
         setError(null);
         setLoading(true);
 
-        const data = await apiFetch<Item[]>("/items");
+        const path = q ? `/items/search?q=${encodeURIComponent(q)}` : "/items";
 
-        if (isMounted) {
-          setItems(data);
-        }
+        const data = await apiFetch<Item[]>(path);
+
+        if (isMounted) setItems(data);
       } catch (err) {
-        if (isMounted) {
-          setError((err as Error).message);
-        }
+        if (isMounted) setError((err as Error).message);
       } finally {
-        if (isMounted) {
-          setLoading(false);
-        }
+        if (isMounted) setLoading(false);
       }
     };
 
@@ -48,22 +43,11 @@ export function ItemsPage() {
     return () => {
       isMounted = false;
     };
-  }, []);
+  }, [q]);
 
   const visibleItems = useMemo(() => {
-    const q = normalize(searchParams.get("q") ?? "");
-    const sort = (searchParams.get("sort") as SortValue) ?? "name_asc";
+    const sorted = [...items];
 
-    // filter
-    let result = items;
-    if (q) {
-      result = result.filter((it) => {
-        const hay = `${it.name ?? ""} ${it.description ?? ""}`;
-        return normalize(hay).includes(q);
-      });
-    }
-
-    const sorted = [...result];
     sorted.sort((a, b) => {
       switch (sort) {
         case "name_asc":
@@ -80,7 +64,7 @@ export function ItemsPage() {
     });
 
     return sorted;
-  }, [items, searchParams]);
+  }, [items, sort]);
 
   return (
     <div>

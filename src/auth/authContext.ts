@@ -13,6 +13,11 @@ export type AuthContextValue = {
     lastName?: string;
   }) => Promise<User>;
   logout: () => Promise<void>;
+  updateMe: (payload: {
+    firstName: string;
+    lastName: string;
+    email?: string;
+  }) => Promise<User>;
 };
 
 export const AuthContext = createContext<AuthContextValue | null>(null);

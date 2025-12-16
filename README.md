@@ -1,73 +1,127 @@
-# React + TypeScript + Vite
+# TestShop — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend частина тестового завдання **TestShop** — простий e-commerce демо-додаток, побудований на **React + TypeScript**, який працює з **Rails API backend**.
 
-Currently, two official plugins are available:
+Проєкт демонструє:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* авторизацію користувачів
+* роботу з cookies / сесіями
+* отримання списку товарів
+* створення замовлень
+* базову навігацію між сторінками
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Live Demo
 
-## Expanding the ESLint configuration
+🔗 **Frontend (Netlify)**
+[https://brilliant-choux-11b80d.netlify.app/](https://brilliant-choux-11b80d.netlify.app/)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🔗 **Backend API (Render)**
+[https://solowey-consulting-test-task-backend.onrender.com](https://solowey-consulting-test-task-backend.onrender.com)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 🧑‍💻 Test Credentials
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Для демо можна використати тестового користувача:
+
+```
+Email: john@example.com
+Password: password
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+> Або зареєструвати нового користувача через форму логіну.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Tech Stack
+
+* **React**
+* **TypeScript**
+* **Vite**
+* **React Router**
+* **Fetch API**
+* **CSS / SCSS**
+* **Netlify** — хостинг frontend
+* **Rails API + Devise** — backend (cookies auth)
+
+---
+
+## 🔐 Authentication
+
+* Авторизація реалізована через **cookie-based sessions**
+* Використовується `credentials: "include"` для HTTP-запитів
+* CORS налаштований на backend для конкретного Netlify домену
+* Cookies мають `SameSite=None` та `Secure=true` для роботи між доменами
+
+---
+
+## ⚙️ Environment Variables
+
+Для локального запуску створи `.env` файл:
+
+```env
+VITE_API_URL=http://localhost:3000
 ```
+
+Для production (Netlify):
+
+```env
+VITE_API_URL=https://solowey-consulting-test-task-backend.onrender.com
+```
+
+---
+
+## 🧪 Local Development
+
+1. Клонувати репозиторій:
+
+```bash
+git clone https://github.com/your-username/testshop-frontend.git
+cd testshop-frontend
+```
+
+2. Встановити залежності:
+
+```bash
+npm install
+```
+
+3. Запустити dev сервер:
+
+```bash
+npm run dev
+```
+
+Frontend буде доступний за адресою:
+👉 `http://localhost:5173`
+
+---
+
+## 🏗️ Build
+
+```bash
+npm run build
+```
+
+---
+
+## 📌 Notes
+
+* Проєкт створений у рамках тестового завдання
+* Основний фокус — **функціональність**, а не дизайн
+* Реалізовано повний flow: login → items → orders
+* Backend та frontend розгорнуті окремо
+
+---
+
+## 👤 Author
+
+**Dmytro Lymar**
+Frontend / Fullstack Developer
+
+* GitHub: [https://github.com/DmytroLymar](https://github.com/DmytroLymar)
+* LinkedIn: [https://www.linkedin.com/in/dmytro-lymar-47338a38a/]
+
+---

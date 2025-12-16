@@ -1,0 +1,157 @@
+.card {
+  border: 1px solid #333;
+  border-radius: 12px;
+  background: #111;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+
+  transition: transform 160ms ease, box-shadow 160ms ease,
+    border-color 160ms ease;
+
+  &:hover {
+    transform: scale(1.02);
+    border-color: #4a4a4a;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.imageLink {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.imageWrap {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #0c0c0c;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+
+  transition: transform 200ms ease;
+
+  .card:hover & {
+    transform: scale(1.03);
+  }
+}
+
+.imageFallback {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  display: grid;
+  place-items: center;
+  color: #888;
+  background: #0c0c0c;
+  border-bottom: 1px solid #222;
+  font-size: 14px;
+}
+
+.content {
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.title {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.titleLink {
+  color: inherit;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.desc {
+  margin: 0;
+  color: #bdbdbd;
+  font-size: 14px;
+  line-height: 1.35;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.price {
+  margin: 6px 0 0;
+  font-weight: 700;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.cartBtn {
+  height: 36px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #0f0f0f;
+  color: #fff;
+  cursor: pointer;
+
+  transition: border-color 160ms ease, transform 160ms ease;
+
+  &:hover:not(:disabled) {
+    border-color: #555;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}
+
+.favBtn {
+  display: flex;
+  justify-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #333;
+  background: #0f0f0f;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+
+  transition: border-color 160ms ease, transform 160ms ease;
+
+  &:hover:not(:disabled) {
+    border-color: #555;
+    transform: translateY(-1px);
+  }
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+}

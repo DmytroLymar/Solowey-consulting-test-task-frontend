@@ -1,9 +1,16 @@
 import { NavLink } from "react-router-dom";
 import styles from "./Header.module.scss";
 import { useAuth } from "../../auth/useAuth";
+import { useCartStore } from "../../store/cartStore";
+import { useFavoritesStore } from "../../store/favoritesStore";
 
 export function Header() {
   const { user, logout } = useAuth();
+
+  const cartCount = useCartStore((s) =>
+    s.lines.reduce((sum, l) => sum + l.quantity, 0)
+  );
+  const favoritesCount = useFavoritesStore((s) => s.ids.length);
 
   if (!user) {
     return null;
@@ -25,14 +32,7 @@ export function Header() {
           >
             Items
           </NavLink>
-          <NavLink
-            to="/cart"
-            className={({ isActive }) =>
-              isActive ? styles.active : styles.link
-            }
-          >
-            Cart
-          </NavLink>
+
           <NavLink
             to="/orders"
             className={({ isActive }) =>
@@ -41,6 +41,7 @@ export function Header() {
           >
             Orders
           </NavLink>
+
           {user.role === "admin" && (
             <NavLink
               to="/admin"
@@ -61,6 +62,20 @@ export function Header() {
           <button type="button" className={styles.btn} onClick={logout}>
             Logout
           </button>
+
+          {/* Favorites */}
+          <NavLink to="/favorites" className={styles.iconBtn}>
+            <span className={styles.icon}>♡</span>
+            {favoritesCount > 0 && (
+              <span className={styles.badge}>{favoritesCount}</span>
+            )}
+          </NavLink>
+
+          {/* Cart */}
+          <NavLink to="/cart" className={styles.iconBtn}>
+            <span className={styles.icon}>🛒</span>
+            {cartCount > 0 && <span className={styles.badge}>{cartCount}</span>}
+          </NavLink>
         </div>
       </div>
     </header>

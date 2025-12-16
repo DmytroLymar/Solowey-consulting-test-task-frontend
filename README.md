@@ -53,7 +53,6 @@ Password: password
 * Авторизація реалізована через **cookie-based sessions**
 * Використовується `credentials: "include"` для HTTP-запитів
 * CORS налаштований на backend для конкретного Netlify домену
-* Cookies мають `SameSite=None` та `Secure=true` для роботи між доменами
 
 ---
 

@@ -16,7 +16,7 @@ export function LoginPage() {
     try {
       setError(null);
       await login(email, password);
-      navigate("/", { replace: true });
+      navigate("/home", { replace: true });
     } catch (err) {
       setError((err as Error).message);
     }

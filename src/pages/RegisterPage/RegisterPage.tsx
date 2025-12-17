@@ -46,7 +46,7 @@ export function RegisterPage() {
         firstName: firstName.trim(),
         lastName: lastName.trim(),
       });
-      navigate("/items", { replace: true });
+      navigate("/home", { replace: true });
     } catch (err) {
       setSubmitError((err as Error).message);
     } finally {

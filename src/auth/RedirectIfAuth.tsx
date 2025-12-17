@@ -10,7 +10,7 @@ export function RedirectIfAuth() {
   }
 
   if (user) {
-    return <Navigate to="/items" replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;

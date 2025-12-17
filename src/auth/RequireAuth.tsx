@@ -7,13 +7,7 @@ export function RequireAuth() {
   const location = useLocation();
 
   if (isLoading) {
-    return (
-      <div style={{ padding: 16 }}>
-        <h2>ServerStartingPage should be here</h2>
-        <pre>{JSON.stringify({ isLoading, user }, null, 2)}</pre>
-        <ServerStartingPage />
-      </div>
-    );
+    return <ServerStartingPage />;
   }
 
   if (!user) {

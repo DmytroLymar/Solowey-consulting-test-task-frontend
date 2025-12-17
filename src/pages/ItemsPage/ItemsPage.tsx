@@ -72,15 +72,23 @@ export function ItemsPage() {
         <h1>Items</h1>
       </header>
 
-      {loading && <p className={styles.subtitle}>Loading...</p>}
+      <ItemsFilters total={visibleItems.length} />
+
       {error && <p className={styles.error}>{error}</p>}
 
-      {!loading && !error && (
-        <>
-          <ItemsFilters total={visibleItems.length} />
-          <ItemsGrid items={visibleItems} />
-        </>
-      )}
+      <div className={styles.gridWrap}>
+        <ItemsGrid items={visibleItems} />
+
+        {loading && (
+          <div className={styles.overlay} aria-live="polite" aria-busy="true">
+            <div className={styles.spinner} />
+            <div className={styles.overlayText}>Loading items…</div>
+            <div className={styles.overlaySubtext}>
+              Server may take a few seconds to respond.
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

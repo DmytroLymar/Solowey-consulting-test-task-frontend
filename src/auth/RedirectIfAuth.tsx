@@ -1,11 +1,12 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "./useAuth";
+import { ServerStartingPage } from "../components/ServerStartingPage";
 
 export function RedirectIfAuth() {
   const { user, isLoading } = useAuth();
 
   if (isLoading) {
-    return <div style={{ padding: 16 }}>Loading...</div>;
+    return <ServerStartingPage />;
   }
 
   if (user) {
